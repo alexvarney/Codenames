@@ -1,14 +1,14 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const uuid = require("uuid");
 
 const port = process.env.PORT || 4001;
-const index = require("./routes/index");
 
 const GameManager = require("./game");
 
-app.use(index);
+app.use("/", express.static("../client/build"));
 
 let games = [];
 
