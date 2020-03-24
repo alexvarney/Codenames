@@ -5,10 +5,11 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   & > div {
-    background-color: #6b7580;
+    background-color: #6b7580a0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    flex-grow: 1;
   }
 `;
 

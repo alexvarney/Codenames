@@ -41,13 +41,13 @@ const Container = styled.div`
     }
   }
   & > div:nth-child(1) {
-    background: #f9f9f0;
+    background: #f9f9f0a0;
   }
   & > div:nth-child(2) {
-    background: #d56a60;
+    background: #d56a60a0;
   }
   & > div:nth-child(3) {
-    background: #62afd5;
+    background: #62afd5a0;
   }
 `;
 

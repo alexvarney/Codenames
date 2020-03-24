@@ -8,14 +8,14 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   user-select: none;
-  background: #f4f5f5;
+  background: rgba(0, 0, 0, 0.35);
 `;
 
 const Gameboard = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   max-width: 750px;
-
+  margin: 10px;
   padding: 10px;
   border-radius: 5px;
 `;

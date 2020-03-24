@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import styled, { css } from "styled-components";
 import { GameContext } from "./App";
 import SessionOptions from "./SessionOptions";
 import {
@@ -26,7 +25,7 @@ export default function Component(props) {
     <Container>
       <div>
         <Banner>
-          <span>Codenames!</span>
+          <span>CODENAMES</span>
         </Banner>
         <ContentContainer>
           <NewGameButton onClick={newGame}>New Game</NewGameButton>

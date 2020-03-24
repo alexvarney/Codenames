@@ -6,4 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  background: repeating-linear-gradient(
+    -45deg,
+    #eaeaea,
+    #eaeaea 10px,
+    #e1e1e1 10px,
+    #e1e1e1 20px
+  );
+  letter-spacing: -1px;
 }

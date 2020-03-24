@@ -53,13 +53,14 @@ const TileWrapper = styled.div`
   color: #333333;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  padding: ${props => (props.isSpymaster ? "7px" : "13px")};
+  padding: ${props => (props.isSpymaster ? "7px" : "14px")};
   margin: 5px;
   cursor: pointer;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
   font-weight: bold;
+  background-color: #f9f9f0;
   
   & > span {
     padding: 5px;
@@ -87,19 +88,19 @@ const TileWrapper = styled.div`
   ${props =>
     props.type === 0 && props.isSpymaster
       ? css`
-          border: 6px solid #f1f1d9;
+          border: 8px solid #f1f1d9;
         `
       : props.type === 1 && props.isSpymaster
       ? css`
-          border: 6px solid #7d7d7d;
+          border: 8px solid #131313;
         `
       : props.type === 2 && props.isSpymaster
       ? css`
-          border: 6px solid #c44236;
+          border: 8px solid #c44236;
         `
       : props.type === 3 && props.isSpymaster
       ? css`
-          border: 6px solid #3695c4;
+          border: 8px solid #3695c4;
         `
       : null}
 `;
