@@ -31,7 +31,6 @@ io.on("connection", function(socket) {
 
     game = new GameManager();
     const nickname = player && player.nickname ? player.nickname : null;
-    console.log(nickname);
 
     player = game.addSession(socket, nickname);
     socket.emit("player_update", { ...player, session: true });

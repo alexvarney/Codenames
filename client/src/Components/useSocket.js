@@ -19,9 +19,7 @@ export default url => {
   //Setup the event handlers
   useEffect(() => {
     if (socket) {
-      socket.on("message", res => console.log(res));
       socket.on("game_update", res => {
-        console.log(res);
         setGameState(res);
       });
       socket.on("player_update", res => {

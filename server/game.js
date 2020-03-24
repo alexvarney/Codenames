@@ -84,8 +84,6 @@ const generateGameState = () => {
 
 class GameManager {
   constructor() {
-    console.log("constructor called!");
-
     this._id = uuid.v4();
     this._gameState = generateGameState();
     this._players = [];
@@ -176,8 +174,6 @@ class GameManager {
   }
 
   flipTile(tileID) {
-    console.log("flipTile!");
-
     const tile = this._gameState.find(item => item.id === tileID);
     if (tile) {
       tile.flipped = true;
