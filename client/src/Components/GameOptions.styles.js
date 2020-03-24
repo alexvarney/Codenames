@@ -3,12 +3,12 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
   & > div {
     background-color: #6b7580;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 500px;
   }
 `;
 

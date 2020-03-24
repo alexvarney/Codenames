@@ -8,13 +8,14 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   user-select: none;
+  background: #f4f5f5;
 `;
 
 const Gameboard = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   max-width: 750px;
-  background: #f4f5f5;
+
   padding: 10px;
   border-radius: 5px;
 `;
@@ -25,7 +26,7 @@ export default function GameBoard() {
   return (
     <Container>
       <Gameboard>
-        {Array.from(gameState).map(item => (
+        {Array.from(gameState.gameState).map(item => (
           <Tile key={item.id} data={item} />
         ))}
       </Gameboard>

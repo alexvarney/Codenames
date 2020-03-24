@@ -54,6 +54,18 @@ export default url => {
     }
   };
 
+  const joinTeam = teamId => {
+    if (socket) {
+      socket.emit("set_team", teamId);
+    }
+  };
+
+  const setSpymaster = value => {
+    if (socket) {
+      socket.emit("set_spymaster", value);
+    }
+  };
+
   return {
     socket,
     gameState,
@@ -61,6 +73,8 @@ export default url => {
     createGame,
     userState,
     flipTile,
-    joinGame
+    joinGame,
+    joinTeam,
+    setSpymaster
   };
 };

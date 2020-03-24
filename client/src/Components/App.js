@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import GameBoard from "./GameBoard";
-import GameOptions from "./GameOptions";
+import GameBoard from "../Components/GameBoard";
+import GameOptions from "../Components/GameOptions";
+import Lobby from "../Components/Lobby";
+
 import useSocket from "./useSocket";
 
 export const GameContext = React.createContext();
@@ -13,7 +15,12 @@ function App() {
     <GameContext.Provider value={socketContext}>
       <div className="App">
         <GameOptions />
-        {gameState && <GameBoard />}
+        {gameState && (
+          <>
+            <GameBoard />
+            <Lobby />
+          </>
+        )}
       </div>
     </GameContext.Provider>
   );

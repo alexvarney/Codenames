@@ -1,15 +1,15 @@
 import React from "react";
-import GameBoard from "../Components/GameBoard";
+import Lobby from "../Components/Lobby";
 import StorybookProvider from "./StorybookProvider";
 
 export default {
-  title: "Gameboard",
-  component: GameBoard
+  title: "Lobby",
+  component: Lobby
 };
 
 export const story = () => (
   <StorybookProvider>
-    <GameBoard />
+    <Lobby />
   </StorybookProvider>
 );
 

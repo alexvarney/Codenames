@@ -53,12 +53,14 @@ const TileWrapper = styled.div`
   color: #333333;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  padding: 7px;
+  padding: ${props => (props.isSpymaster ? "7px" : "13px")};
   margin: 5px;
   cursor: pointer;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
+  font-weight: bold;
+  
   & > span {
     padding: 5px;
   }

@@ -93,11 +93,11 @@ class GameManager {
   }
 
   get players() {
-    return this._players.map(player => ({
-      id: player.id,
-      nickname: player.nickname,
-      team: player.team
-    }));
+    return this._players.map(player => {
+      const response = { ...player };
+      delete response.session;
+      return response;
+    });
   }
 
   get state() {
@@ -137,7 +137,7 @@ class GameManager {
     this.updatePlayers();
 
     session.on("flip_tile", tileId => {
-      this.flipTile(tileId);
+      if (!player.isSpymaster && player.team) this.flipTile(tileId);
     });
 
     session.on("set_nickname", nickname => {
@@ -145,8 +145,13 @@ class GameManager {
       this.updateUserData(player);
     });
 
-    session.on("set_codemaster", value => {
+    session.on("set_spymaster", value => {
       player.isSpymaster = value;
+      this.updateUserData(player);
+    });
+
+    session.on("set_team", value => {
+      player.team = value;
       this.updateUserData(player);
     });
 
@@ -157,6 +162,7 @@ class GameManager {
     this._players = this._players.filter(
       player => player.session.id !== sessionId
     );
+    this.updatePlayers();
   }
 
   setCodemaster(id, value) {
@@ -173,7 +179,9 @@ class GameManager {
     console.log("flipTile!");
 
     const tile = this._gameState.find(item => item.id === tileID);
-    tile.flipped = !tile.flipped;
+    if (tile) {
+      tile.flipped = true;
+    }
     this.updatePlayers();
   }
 }
