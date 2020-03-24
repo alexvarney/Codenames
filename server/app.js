@@ -53,19 +53,13 @@ io.on("connection", function(socket) {
     }
   });
 
-  socket.on("flip_tile", tileId => {
-    if (game) {
-      game.flipTile(tileId);
-    }
-  });
-
-  socket.on("set_nickname", nickname => {
+  /*socket.on("set_nickname", nickname => {
     if (game) {
       player = game.setNickname(player.id, nickname);
       let response = { ...player, session: true };
       socket.emit("player_update", response);
     }
-  });
+  });*/
 
   socket.on("disconnect", () => {
     removePlayer(player, game);

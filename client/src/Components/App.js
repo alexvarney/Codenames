@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import GameBoard from "./GameBoard";
 import GameOptions from "./GameOptions";
 import useSocket from "./useSocket";
@@ -14,7 +13,7 @@ function App() {
     <GameContext.Provider value={socketContext}>
       <div className="App">
         <GameOptions />
-        {gameState && <GameBoard gameState={gameState.gameState} />}
+        {gameState && <GameBoard />}
       </div>
     </GameContext.Provider>
   );

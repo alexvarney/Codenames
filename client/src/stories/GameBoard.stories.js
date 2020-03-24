@@ -1,5 +1,5 @@
 import React from "react";
-import GameBoard from "../GameBoard";
+import GameBoard from "../Components/GameBoard";
 import StorybookProvider from "./StorybookProvider";
 
 const gameState = [

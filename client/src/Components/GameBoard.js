@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Tile from "./Tile";
 import styled from "styled-components";
+import { GameContext } from "./App";
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +19,9 @@ const Gameboard = styled.div`
   border-radius: 5px;
 `;
 
-export default function GameBoard({ gameState }) {
+export default function GameBoard() {
+  const { gameState } = useContext(GameContext);
+
   return (
     <Container>
       <Gameboard>

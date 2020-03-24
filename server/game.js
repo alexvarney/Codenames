@@ -115,10 +115,17 @@ class GameManager {
     });
   }
 
+  updateUserData(player) {
+    const response = { ...player };
+    delete response.session;
+    this.updatePlayers();
+    player.session.emit("player_update", response);
+  }
+
   addSession(session, nickname = null) {
     const id = uuid.v4();
 
-    const newPlayer = {
+    const player = {
       id: id,
       nickname: nickname || "Unknown User#" + id.slice(0, 4),
       team: null,
@@ -126,26 +133,30 @@ class GameManager {
       session: session
     };
 
-    this._players.push(newPlayer);
-
+    this._players.push(player);
     this.updatePlayers();
-    return newPlayer;
+
+    session.on("flip_tile", tileId => {
+      this.flipTile(tileId);
+    });
+
+    session.on("set_nickname", nickname => {
+      player.nickname = nickname;
+      this.updateUserData(player);
+    });
+
+    session.on("set_codemaster", value => {
+      player.isSpymaster = value;
+      this.updateUserData(player);
+    });
+
+    return player;
   }
 
   removeSession(sessionId) {
     this._players = this._players.filter(
       player => player.session.id !== sessionId
     );
-  }
-
-  setNickname(id, nickname) {
-    const user = this._players.find(player => player.id === id);
-
-    if (user) {
-      user.nickname = nickname;
-      this.updatePlayers();
-      return user;
-    }
   }
 
   setCodemaster(id, value) {
