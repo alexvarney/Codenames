@@ -89,7 +89,7 @@ export default function Component(props) {
       <div>
         <p>UNASSIGNED</p>
         {users.none.map(user => (
-          <NicknameDisplay>
+          <NicknameDisplay key={user.id}>
             {user.nickname + (user.isSpymaster ? " (Spymaster)" : "")}
           </NicknameDisplay>
         ))}
@@ -100,7 +100,7 @@ export default function Component(props) {
           <button onClick={() => joinTeam(1)}>Join</button>
         )}
         {users.red.map(user => (
-          <NicknameDisplay>
+          <NicknameDisplay key={user.id}>
             {user.nickname + (user.isSpymaster ? " (Spymaster)" : "")}
           </NicknameDisplay>
         ))}
@@ -117,7 +117,7 @@ export default function Component(props) {
           <button onClick={() => joinTeam(2)}>Join</button>
         )}
         {users.blue.map(user => (
-          <NicknameDisplay>
+          <NicknameDisplay key={user.id}>
             {user.nickname + (user.isSpymaster ? " (Spymaster)" : "")}
           </NicknameDisplay>
         ))}

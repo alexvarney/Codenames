@@ -103,6 +103,21 @@ const TileWrapper = styled.div`
           border: 8px solid #3695c4;
         `
       : null}
+
+
+    @media screen and (max-width: 600px) {
+      padding: 5px;
+      border-width: 4px;
+      margin: 3px;
+      font-size: 11px;
+    }
+
+    @media screen and (max-width: 350px) {
+      padding: 2px;
+      border-width: 3px;
+      margin: 2px;
+      font-size: 10px;
+    }
 `;
 
 export default TileWrapper;

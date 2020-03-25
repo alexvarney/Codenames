@@ -18,6 +18,12 @@ const Gameboard = styled.div`
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
+
+  @media screen and (max-width: 600px) {
+    margin: 10px 0 10px 0;
+    padding: 0;
+    grid-gap: 0px;
+  }
 `;
 
 export default function GameBoard() {

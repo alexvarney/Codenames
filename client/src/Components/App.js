@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const socketContext = useSocket("/");
+  const socketContext = useSocket("http://localhost:4001");
   const { gameState } = socketContext;
 
   return (
