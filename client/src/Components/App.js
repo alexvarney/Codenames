@@ -7,6 +7,9 @@ import Lobby from "../Components/Lobby";
 
 import useSocket from "./useSocket";
 
+const ENDPOINT =
+  process.env.NODE_ENV === "development" ? "localhost:4001/" : "/";
+
 export const GameContext = React.createContext();
 
 const Wrapper = styled.div`
@@ -17,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const socketContext = useSocket("/");
+  const socketContext = useSocket(ENDPOINT);
   const { gameState } = socketContext;
 
   return (
