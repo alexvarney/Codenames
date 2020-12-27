@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { GameContext } from "./App";
 import { Row, StyledInput, InputButton } from "./GameOptions.styles";
@@ -20,11 +20,11 @@ const GameIdText = styled.span`
   font-family: monospace;
   transition: all 0.1s ease;
   font-size: 14px;
-  color: ${props => (props.wasCopied ? "grey" : "white")};
+  color: ${(props) => (props.wasCopied ? "grey" : "white")};
 `;
 
-const copyToClipboard = text => {
-  navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+const copyToClipboard = (text) => {
+  navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
     if (result.state === "granted" || result.state === "prompt") {
       navigator.clipboard.writeText(text);
     }
@@ -37,15 +37,23 @@ export default function Component(props) {
   const [wasCopied, setWasCopied] = useState(false);
 
   const setNickname = () => {
+    localStorage.setItem("nickname", nameInputVal);
     setName(nameInputVal);
     setNameInputVal("");
   };
+
+  useEffect(() => {
+    const savedName = localStorage.getItem("nickname");
+    if (userState && savedName && userState.nickname !== savedName) {
+      setName(savedName);
+    }
+  }, [userState]);
 
   const nickname = userState && userState.nickname;
   const gameID = gameState && gameState.id;
 
   const copyID = () => {
-    copyToClipboard(gameID);
+    copyToClipboard(`${window.location.origin}/#/join/${gameID}`);
     setWasCopied(true);
     setTimeout(() => setWasCopied(false), 100);
   };
@@ -59,7 +67,7 @@ export default function Component(props) {
       <Row>
         <StyledInput
           value={nameInputVal}
-          onChange={e => setNameInputVal(e.target.value)}
+          onChange={(e) => setNameInputVal(e.target.value)}
           placeholder={"Name: " + nickname}
         />
         <InputButton onClick={setNickname}>Set Nickname</InputButton>
