@@ -22,10 +22,10 @@ export default function JoinURLHandler() {
   const { joinGame, socket, gameState } = useContext(GameContext);
 
   useEffect(() => {
-    if (id && socket && !gameState) {
+    if (id && socket) {
       console.log(`joining ${id}`);
 
-      setTimeout(() => socket.emit("join_game", id), 1500);
+      setTimeout(() => joinGame(id), 1500);
     }
   }, [socket]);
 
