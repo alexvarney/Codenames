@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+import { HashRouter, Switch, Route } from "react-router-dom";
+
+import JoinURLHandler from "./JoinURLHandler";
 import GameBoard from "../Components/GameBoard";
 import GameOptions from "../Components/GameOptions";
 import Lobby from "../Components/Lobby";
@@ -17,6 +20,7 @@ const Wrapper = styled.div`
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 `;
 
 function App() {
@@ -24,17 +28,25 @@ function App() {
   const { gameState } = socketContext;
 
   return (
-    <GameContext.Provider value={socketContext}>
-      <Wrapper>
-        <GameOptions />
-        {gameState && (
-          <>
-            <GameBoard />
-            <Lobby />
-          </>
-        )}
-      </Wrapper>
-    </GameContext.Provider>
+    <HashRouter>
+      <GameContext.Provider value={socketContext}>
+        <Wrapper>
+          <GameOptions />
+          {gameState && (
+            <>
+              <GameBoard />
+              <Lobby />
+            </>
+          )}
+        </Wrapper>
+
+        <Switch>
+          <Route path="/join/:id">
+            <JoinURLHandler />
+          </Route>
+        </Switch>
+      </GameContext.Provider>
+    </HashRouter>
   );
 }
 
