@@ -5,7 +5,7 @@ const tileTypes = {
   neutral: 0,
   suddenDeath: 1,
   teamA: 2,
-  teamB: 3
+  teamB: 3,
 };
 
 const generateGameState = () => {
@@ -60,7 +60,7 @@ const generateGameState = () => {
     suddenDeathIndex = Math.floor(Math.random() * gameWords.length);
   }
 
-  return gameWords.map(word => {
+  return gameWords.map((word) => {
     const wordIndex = gameWords.indexOf(word);
 
     let tileType = tileTypes.neutral;
@@ -77,7 +77,7 @@ const generateGameState = () => {
       name: word,
       flipped: false,
       type: tileType,
-      id: uuid.v4()
+      id: uuid.v4(),
     };
   });
 };
@@ -91,7 +91,7 @@ class GameManager {
   }
 
   get players() {
-    return this._players.map(player => {
+    return this._players.map((player) => {
       const response = { ...player };
       delete response.session;
       return response;
@@ -103,13 +103,30 @@ class GameManager {
       id: this._id,
       players: this.players,
       gameState: this._gameState,
-      turn: this._turn
+      turn: this._turn,
+    };
+  }
+
+  get filteredState() {
+    return {
+      id: this._id,
+      players: this.players,
+      gameState: this._gameState.map((tile) =>
+        tile.flipped ? tile : { ...tile, type: tileTypes.neutral }
+      ),
+      turn: this._turn,
     };
   }
 
   updatePlayers() {
-    this._players.forEach(player => {
-      player.session.emit("game_update", this.state);
+    this._players.forEach((player) => {
+      console.log(player);
+
+      if (player.isSpymaster) {
+        player.session.emit("game_update", this.state);
+      } else {
+        player.session.emit("game_update", this.filteredState);
+      }
     });
   }
 
@@ -128,27 +145,27 @@ class GameManager {
       nickname: nickname || "Unknown User#" + id.slice(0, 4),
       team: null,
       isSpymaster: false,
-      session: session
+      session: session,
     };
 
     this._players.push(player);
     this.updatePlayers();
 
-    session.on("flip_tile", tileId => {
+    session.on("flip_tile", (tileId) => {
       if (!player.isSpymaster && player.team) this.flipTile(tileId);
     });
 
-    session.on("set_nickname", nickname => {
+    session.on("set_nickname", (nickname) => {
       player.nickname = nickname;
       this.updateUserData(player);
     });
 
-    session.on("set_spymaster", value => {
+    session.on("set_spymaster", (value) => {
       player.isSpymaster = value;
       this.updateUserData(player);
     });
 
-    session.on("set_team", value => {
+    session.on("set_team", (value) => {
       player.team = value;
       this.updateUserData(player);
     });
@@ -158,13 +175,13 @@ class GameManager {
 
   removeSession(sessionId) {
     this._players = this._players.filter(
-      player => player.session.id !== sessionId
+      (player) => player.session.id !== sessionId
     );
     this.updatePlayers();
   }
 
   setCodemaster(id, value) {
-    const user = this._players.find(player => player.id === id);
+    const user = this._players.find((player) => player.id === id);
 
     if (user) {
       user.isSpymaster = value;
@@ -174,7 +191,7 @@ class GameManager {
   }
 
   flipTile(tileID) {
-    const tile = this._gameState.find(item => item.id === tileID);
+    const tile = this._gameState.find((item) => item.id === tileID);
     if (tile) {
       tile.flipped = true;
     }
