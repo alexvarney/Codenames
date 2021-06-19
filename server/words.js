@@ -639,7 +639,7 @@ module.exports = [
   "Shell",
   "Peanut",
   "House",
-  "Univerity",
+  "University",
   "Camp",
   "Mohawk",
   "Anthem",
